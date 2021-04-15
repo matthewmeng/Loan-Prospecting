@@ -2,10 +2,14 @@ import pandas as pd
 
 filename = 'Sample_data_approved.xls'
 data = pd.read_excel(filename)
-x = data.iloc[:,:7].as_matrix()
-y = data.iloc[:,7].as_matrix()
-x2 = data.iloc[:,[1,4,5,6,10,12]].as_matrix()
-x3 = data.iloc[:,[4]].as_matrix()
+x = data.iloc[:,:7].to_numpy()
+y = data.iloc[:,7].to_numpy()
+x2 = data.iloc[:,[1,4,5,6,10,12]].to_numpy()
+x3 = data.iloc[:,[4]].to_numpy()
+x4 = data.iloc[:,[5]].to_numpy()
+x5 = data.iloc[:,[1]].to_numpy()
+
+# y4 = data.iloc[:,4].to_numpy()
 
 # filename2 = 'Sample_data_approved_2.xls'
 # data2 = pd.read_excel(filename2)
@@ -37,9 +41,16 @@ lr2.fit(x2,y)
 
 lr3 = LR()
 lr3.fit(x3,y)
+
+lr4 = LR()
+lr4.fit(x4,y)
+
+lr5 = LR()
+lr5.fit(x5,y)
 print(u'LogicRegression Finished')
 
 print(u'Dataset1 method 1 average accurate is: %s' % lr.score(x,y))
 print(u'Dataset1 method 2 average accurate is: %s' % lr2.score(x2,y))
-print(u'Dataset2 method 1 average accurate is: %s' % lr3.score(x3,y))
-
+print(u'Dataset1 (Loan Term) average accurate is: %s' % lr3.score(x3,y))
+print(u'Dataset1 (Ini Rate) average accurate is: %s' % lr4.score(x4,y))
+print(u'Dataset1 (Loan Amount) average accurate is: %s' % lr5.score(x5,y))
